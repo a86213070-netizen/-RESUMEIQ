@@ -1,0 +1,351 @@
+# ResumeIQ — AI-Powered Resume Analyzer & Career Recommendation Platform
+
+**Analyze your resume. Discover your skills. Explore your career opportunities.**
+
+ResumeIQ is a Generative & Agentic AI course project designed to help students, graduates, and job seekers understand their resumes, identify skill gaps, and discover suitable career opportunities using Natural Language Processing (NLP) and machine-learning techniques.
+
+> **Project status:** In Development
+> **Project type:** Academic AI Project
+> **Primary language:** Python
+> **Frontend:** React, TypeScript
+> **Backend:** FastAPI
+
+## 1. Problem Statement
+
+Job seekers often struggle to determine whether their resumes match job requirements. They may not recognize missing skills, understand resume weaknesses, or know which career opportunities best match their qualifications.
+
+ResumeIQ addresses this problem by processing resume content, comparing it with job descriptions, identifying relevant skills, and generating explainable career recommendations.
+
+## 2. Target Users
+
+* University students and fresh graduates
+* Job seekers preparing for applications
+* Professionals exploring career changes
+* Career advisors and university placement teams
+
+## 3. Key Features
+
+* **Resume Upload:** Upload supported resume documents.
+* **Resume Text Extraction:** Extract and preprocess resume content.
+* **Skill Extraction:** Identify relevant skills from resume text.
+* **Resume–Job Matching:** Calculate text similarity between resumes and job descriptions.
+* **Skill Gap Analysis:** Identify job requirements not found in the resume.
+* **Career Recommendations:** Suggest relevant roles based on matching criteria.
+* **Interactive Dashboard:** Display analysis results and recommendations.
+* **FAQ Chatbot:** Answer common questions using a predefined knowledge base.
+* **Input Validation:** Handle missing inputs and unsupported files.
+* **Automated Testing:** Verify core AI functions and error handling.
+
+Features will be marked as complete only after implementation and testing.
+
+## 4. Technologies Used
+
+| Technology          | Purpose                      |
+| ------------------- | ---------------------------- |
+| Python              | Backend and AI logic         |
+| FastAPI             | REST API development         |
+| React               | Frontend interface           |
+| TypeScript          | Frontend type safety         |
+| Pandas              | Data processing              |
+| NumPy               | Numerical operations         |
+| scikit-learn        | TF-IDF and cosine similarity |
+| PyMuPDF             | PDF text extraction          |
+| Pydantic            | Input and output validation  |
+| SQLite / PostgreSQL | Data persistence             |
+| pytest              | Automated testing            |
+| Git and GitHub      | Version control              |
+
+## 5. AI Techniques
+
+### Natural Language Processing
+
+Resume text and job descriptions are cleaned and normalized before analysis.
+
+### TF-IDF Vectorization
+
+TF-IDF converts text into numerical features based on the importance of words within the documents.
+
+### Cosine Similarity
+
+Cosine similarity compares the resulting vectors to estimate how similar the resume and job description are.
+
+The resulting similarity score represents textual similarity. It is not a probability of being hired or a validated measure of professional suitability.
+
+### Skill Extraction
+
+A configurable skill dictionary identifies skills mentioned in resume text and job requirements.
+
+### Skill Gap Analysis
+
+The application compares extracted resume skills with the skills required by a job description to identify potential gaps.
+
+### Recommendation Logic
+
+Career recommendations are ranked using defined matching criteria, such as relevant skills and text similarity.
+
+These techniques provide meaningful AI processing without requiring a paid LLM API.
+
+## 6. Project Architecture
+
+```text
+ResumeIQ
+│
+├── frontend/
+│   ├── src/
+│   ├── public/
+│   └── package.json
+│
+├── backend/
+│   ├── app/
+│   │   ├── main.py
+│   │   ├── api/
+│   │   ├── ai/
+│   │   │   ├── preprocessing.py
+│   │   │   ├── skill_extraction.py
+│   │   │   ├── similarity.py
+│   │   │   └── recommendations.py
+│   │   ├── services/
+│   │   ├── models/
+│   │   └── schemas/
+│   ├── tests/
+│   └── requirements.txt
+│
+├── docs/
+│   ├── architecture.md
+│   └── screenshots/
+│
+├── .env.example
+├── .gitignore
+└── README.md
+```
+
+This is the proposed structure. Adjust it to match the source code actually present in your repository.
+
+## 7. How It Works
+
+1. The user uploads a resume.
+2. The backend validates the file.
+3. Text is extracted from the resume.
+4. NLP preprocessing prepares the text for analysis.
+5. The skill extraction module identifies relevant skills.
+6. The user provides a job description.
+7. TF-IDF and cosine similarity calculate textual similarity.
+8. The skill-gap module identifies missing listed requirements.
+9. The recommendation module ranks suitable career options.
+10. The frontend displays the results.
+
+## 8. Installation and Setup
+
+### Prerequisites
+
+Install:
+
+* Python 3.11 or another version supported by the project's dependencies
+* Node.js and npm
+* Git
+
+### Clone the repository
+
+Replace `YOUR_USERNAME` with your GitHub username.
+
+```bash
+git clone https://github.com/YOUR_USERNAME/ResumeIQ.git
+cd ResumeIQ
+```
+
+### Configure the backend
+
+```bash
+cd backend
+python -m venv .venv
+```
+
+Activate the virtual environment.
+
+**Windows PowerShell:**
+
+```powershell
+.venv\Scripts\Activate.ps1
+```
+
+**Windows Command Prompt:**
+
+```bat
+.venv\Scripts\activate.bat
+```
+
+**macOS/Linux:**
+
+```bash
+source .venv/bin/activate
+```
+
+Install the dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Configure environment variables using the project's `.env.example` file, if required.
+
+### Start the backend
+
+From the `backend` directory:
+
+```bash
+uvicorn app.main:app --reload
+```
+
+Open the local API documentation at:
+
+```text
+http://127.0.0.1:8000/docs
+```
+
+This address is for a locally running development server.
+
+### Start the frontend
+
+Open a second terminal:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Open the local address printed by Vite in your terminal.
+
+**Note:** These commands assume the project implements the described structure and entry points. Update them if your actual code uses different paths or commands.
+
+## 9. Example Input and Output
+
+### Example resume
+
+```text
+Python developer with experience in Pandas, SQL,
+data analysis, and machine learning.
+```
+
+### Example job description
+
+```text
+We are looking for a data analyst with Python,
+SQL, Excel, and Power BI skills.
+```
+
+### Illustrative output
+
+```json
+{
+  "job_title": "Data Analyst",
+  "similarity_score": 68.4,
+  "matching_skills": [
+    "Python",
+    "SQL"
+  ],
+  "missing_skills": [
+    "Excel",
+    "Power BI"
+  ],
+  "recommendations": [
+    "Practice Excel data analysis.",
+    "Learn Power BI dashboard development."
+  ]
+}
+```
+
+The example score is illustrative, not a verified output from the application. Actual results depend on the implementation and input data.
+
+## 10. Testing
+
+Run backend tests from the `backend` directory:
+
+```bash
+pytest -v
+```
+
+Recommended test cases include:
+
+* Valid resume text
+* Empty resume content
+* Valid job descriptions
+* Invalid file types
+* Corrupted PDF files
+* Skill extraction accuracy
+* Text similarity calculations
+* Missing skill identification
+* Unexpected input and error handling
+
+The project should be tested in a fresh environment before being considered ready for evaluation.
+
+## 11. Screenshots and Demo
+
+Add genuine screenshots of your working application to:
+
+```text
+docs/screenshots/
+```
+
+Suggested screenshots:
+
+1. Landing page
+2. Resume upload page
+3. Analysis results
+4. Skill-gap analysis
+5. Career recommendations
+6. API documentation
+7. Test results
+
+Embed screenshots in this README after adding the corresponding image files:
+
+```markdown
+![ResumeIQ Dashboard](docs/screenshots/dashboard.png)
+```
+
+You can also include a link to a short demonstration video after uploading it to a suitable hosting platform.
+
+## 12. Security and Privacy
+
+* Never commit API keys, passwords, or private credentials.
+* Use environment variables for secrets.
+* Validate uploaded file types and sizes.
+* Handle malformed documents safely.
+* Avoid logging complete resumes or other sensitive personal data.
+* Restrict access to users' saved reports.
+* Use secure password hashing if authentication is implemented.
+* Configure production CORS, HTTPS, and authorization appropriately.
+
+## 13. Limitations
+
+* Text similarity does not establish whether a candidate is qualified for a job.
+* Skill extraction may miss synonyms, unfamiliar skills, or context-specific meanings.
+* Results depend on resume quality and job-description detail.
+* A predefined skill dictionary requires maintenance.
+* Recommendations may not reflect current labor-market demand unless connected to reliable, up-to-date job data.
+* The application should not be used as the sole basis for consequential hiring decisions.
+
+## 14. Future Improvements
+
+* Add Retrieval-Augmented Generation (RAG) using a curated career-guidance knowledge base.
+* Introduce an LLM for grounded, structured resume feedback.
+* Add evaluation datasets and measurable AI performance metrics.
+* Improve skill extraction using a named-entity recognition model.
+* Integrate current job listings through a permitted data source.
+* Add secure user accounts and analysis history.
+* Improve accessibility and mobile responsiveness.
+* Add deployment automation and continuous integration.
+
+## 15. Academic Purpose
+
+ResumeIQ is developed as a Generative & Agentic AI course project to demonstrate practical applications of NLP, data processing, text similarity, explainable recommendation logic, API development, and software testing.
+
+The implementation and its results should be evaluated using the actual source code and test outputs.
+
+## 16. License
+
+Choose a license appropriate for your project before publishing it. If you intend to make the code openly reusable, an MIT License is one option.
+
+---
+
+**Built as a Generative & Agentic AI course project.**
